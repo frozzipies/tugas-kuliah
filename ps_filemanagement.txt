@@ -1,0 +1,99 @@
+PROGRAM Manajemen_Data_Siswa
+--------------------------------------------------
+
+1.  DEKLARASI
+2.      file_siswa : string = "siswa.txt"
+3.      pilihan : integer
+4.      nama, umur, reg : string
+
+--------------------------------------------------
+5.  PROSEDUR tampilkan_menu()
+6.      TAMPILKAN "==============================="
+7.      TAMPILKAN "   SISTEM DATABASE SISWA"
+8.      TAMPILKAN "==============================="
+9.      TAMPILKAN "1. Tambah Data Siswa"
+10.     TAMPILKAN "2. Hapus Data Siswa"
+11.     TAMPILKAN "3. Cari Data Siswa"
+12.     TAMPILKAN "4. Keluar"
+13.     TAMPILKAN "==============================="
+
+--------------------------------------------------
+14. PROSEDUR tambah_data()
+15.     TAMPILKAN "Masukkan Nama Siswa: "
+16.     INPUT nama
+17.     TAMPILKAN "Masukkan Umur Siswa: "
+18.     INPUT umur
+19.     TAMPILKAN "Masukkan Nomor Registrasi: "
+20.     INPUT reg
+21.     
+22.     BUKA file_siswa DENGAN mode APPEND
+23.     TULIS (nama + "," + umur + "," + reg + "\n")
+24.     TUTUP file_siswa
+25.     
+26.     TAMPILKAN "✅ Data siswa berhasil ditambahkan!"
+
+--------------------------------------------------
+27. PROSEDUR hapus_data()
+28.     TAMPILKAN "Masukkan Nomor Registrasi yang ingin dihapus: "
+29.     INPUT reg
+30.     
+31.     BUKA file_siswa DENGAN mode READ
+32.     BACA semua baris → simpan ke list data_siswa
+33.     TUTUP file_siswa
+34.     
+35.     BUKA file_siswa DENGAN mode WRITE (kosongkan isi)
+36.     UNTUK setiap baris DALAM data_siswa LAKUKAN
+37.         PISAH baris MENJADI [nama, umur, nomor]
+38.         JIKA nomor ≠ reg MAKA
+39.             TULIS (nama + "," + umur + "," + nomor + "\n")
+40.         AKHIR JIKA
+41.     AKHIR UNTUK
+42.     TUTUP file_siswa
+43.     
+44.     TAMPILKAN "✅ Data dengan registrasi " + reg + " berhasil dihapus!"
+
+--------------------------------------------------
+45. PROSEDUR cari_data()
+46.     TAMPILKAN "Masukkan Nomor Registrasi yang ingin dicari: "
+47.     INPUT reg
+48.     
+49.     BUKA file_siswa DENGAN mode READ
+50.     found ← FALSE
+51.     
+52.     UNTUK setiap baris DALAM file_siswa LAKUKAN
+53.         PISAH baris MENJADI [nama, umur, nomor]
+54.         JIKA nomor = reg MAKA
+55.             TAMPILKAN "Nama: ", nama
+56.             TAMPILKAN "Umur: ", umur
+57.             TAMPILKAN "Nomor Registrasi: ", nomor
+58.             found ← TRUE
+59.         AKHIR JIKA
+60.     AKHIR UNTUK
+61.     
+62.     JIKA found = FALSE MAKA
+63.         TAMPILKAN "⚠️ Data tidak ditemukan!"
+64.     AKHIR JIKA
+65.     TUTUP file_siswa
+
+--------------------------------------------------
+66. ALGORITMA UTAMA:
+67.     ULANGI
+68.         PANGGIL tampilkan_menu()
+69.         TAMPILKAN "Pilih Menu [1-4]: "
+70.         INPUT pilihan
+71.         
+72.         PILIH berdasarkan pilihan:
+73.             KASUS 1:
+74.                 PANGGIL tambah_data()
+75.             KASUS 2:
+76.                 PANGGIL hapus_data()
+77.             KASUS 3:
+78.                 PANGGIL cari_data()
+79.             KASUS 4:
+80.                 TAMPILKAN "Terima kasih, program selesai."
+81.                 KELUAR dari perulangan
+82.             LAINNYA:
+83.                 TAMPILKAN "Pilihan tidak valid!"
+84.         AKHIR PILIH
+85.     SAMPAI pilihan = 4
+86. AKHIR PROGRAM
