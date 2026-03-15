@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FitBuddy — Homepage Mockup</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f0f2f5; display: flex; justify-content: center; padding: 40px 20px; font-family: 'DM Sans', sans-serif; min-height: 100vh; }
+  .phone { width: 360px; background: #ffffff; border-radius: 32px; border: 1px solid #ddd; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 8px 40px rgba(0,0,0,0.12); }
+  .status-bar { background: #1E3A5F; color: #ffffff; font-size: 11px; padding: 10px 20px 6px; display: flex; justify-content: space-between; align-items: center; font-weight: 500; }
+  .header { background: linear-gradient(160deg, #1E3A5F 0%, #2E5B8A 100%); padding: 16px 20px 24px; color: white; }
+  .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .greeting { font-size: 13px; color: rgba(255,255,255,0.7); }
+  .user-name { font-size: 20px; font-weight: 600; font-family: 'Space Grotesk', sans-serif; }
+  .avatar { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; color: white; border: 1.5px solid rgba(255,255,255,0.4); }
+  .mood-row { display: flex; gap: 8px; align-items: center; background: rgba(255,255,255,0.12); border-radius: 12px; padding: 8px 12px; cursor: pointer; }
+  .mood-label { font-size: 12px; color: rgba(255,255,255,0.8); }
+  .mood-emoji { font-size: 18px; }
+  .mood-text { font-size: 13px; font-weight: 500; color: white; flex: 1; }
+  .mood-change { font-size: 11px; color: rgba(255,255,255,0.55); }
+  .content { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+  .motivation-card { background: linear-gradient(135deg, #F0F7FF, #E8F4FD); border: 0.5px solid #B5D4F4; border-radius: 16px; padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start; cursor: pointer; transition: transform 0.15s; }
+  .motivation-card:active { transform: scale(0.98); }
+  .motivation-icon { width: 36px; height: 36px; border-radius: 10px; background: #2E5B8A; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+  .motivation-title { font-size: 12px; color: #185FA5; font-weight: 500; margin-bottom: 3px; }
+  .motivation-text { font-size: 13px; color: #0C447C; line-height: 1.4; }
+  .section-title { font-size: 12px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .stat-card { background: #f8f8f8; border-radius: 16px; padding: 14px; border: 0.5px solid #e8e8e8; }
+  .stat-icon { font-size: 20px; margin-bottom: 6px; }
+  .stat-value { font-size: 22px; font-weight: 600; font-family: 'Space Grotesk', sans-serif; color: #1a1a1a; }
+  .stat-unit { font-size: 12px; color: #888; }
+  .stat-label { font-size: 11px; color: #888; margin-top: 2px; }
+  .stat-bar { height: 4px; background: #e0e0e0; border-radius: 2px; margin-top: 8px; overflow: hidden; }
+  .stat-fill { height: 100%; border-radius: 2px; }
+  .steps-fill { background: #1D9E75; width: 72%; }
+  .cal-fill { background: #D85A30; width: 58%; }
+  .sleep-fill { background: #534AB7; width: 87%; }
+  .hr-fill { background: #E24B4A; width: 65%; }
+  .workout-card { background: #ffffff; border: 0.5px solid #e8e8e8; border-radius: 16px; padding: 14px; display: flex; gap: 12px; align-items: center; cursor: pointer; }
+  .workout-thumb { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+  .workout-name { font-size: 14px; font-weight: 500; color: #1a1a1a; }
+  .workout-meta { font-size: 12px; color: #888; margin-top: 2px; }
+  .badge { font-size: 10px; padding: 3px 8px; border-radius: 6px; font-weight: 500; margin-left: auto; flex-shrink: 0; }
+  .badge-green { background: #EAF3DE; color: #3B6D11; }
+  .badge-amber { background: #FAEEDA; color: #854F0B; }
+  .context-banner { background: linear-gradient(135deg, #EAF3DE, #D5ECC0); border: 0.5px solid #C0DD97; border-radius: 14px; padding: 12px 14px; display: flex; gap: 10px; align-items: center; }
+  .context-icon { font-size: 20px; }
+  .context-title { font-size: 12px; font-weight: 500; color: #3B6D11; }
+  .context-text { font-size: 12px; color: #27500A; line-height: 1.4; }
+  .a11y-row { display: flex; gap: 8px; }
+  .a11y-btn { flex: 1; background: #f8f8f8; border: 0.5px solid #e8e8e8; border-radius: 10px; padding: 8px 6px; text-align: center; cursor: pointer; font-size: 10px; color: #666; font-family: 'DM Sans', sans-serif; }
+  .a11y-btn div { font-size: 16px; margin-bottom: 3px; }
+  .nav-bar { background: #ffffff; border-top: 0.5px solid #e8e8e8; padding: 8px 0 12px; display: flex; }
+  .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; padding: 4px 0; }
+  .nav-icon { font-size: 18px; }
+  .nav-label { font-size: 9px; color: #888; }
+  .nav-item.active .nav-label { color: #185FA5; font-weight: 500; }
+  .nav-icon-wrap { background: #E6F1FB; border-radius: 12px; padding: 4px 12px; }
+</style>
+</head>
+<body>
+  <div class="phone">
+    <div class="status-bar">
+      <span>9:41</span>
+      <span style="font-size:16px;letter-spacing:1px">•••</span>
+      <span>●●● 100%</span>
+    </div>
+    <div class="header">
+      <div class="header-top">
+        <div>
+          <div class="greeting">Selamat pagi,</div>
+          <div class="user-name">Rizky 👋</div>
+        </div>
+        <div class="avatar">RK</div>
+      </div>
+      <div class="mood-row" onclick="cycleMood()">
+        <span class="mood-emoji" id="mood-emoji">😐</span>
+        <div>
+          <div class="mood-label">Bagaimana perasaanmu?</div>
+          <div class="mood-text" id="mood-text">Biasa saja</div>
+        </div>
+        <span class="mood-change">Ubah</span>
+      </div>
+    </div>
+    <div class="content">
+      <div class="motivation-card" onclick="nextMotivation()">
+        <div class="motivation-icon">💬</div>
+        <div>
+          <div class="motivation-title">Motivasi untukmu hari ini</div>
+          <div class="motivation-text" id="mot-text">"Kamu sudah 3 hari berturut-turut aktif! Pertahankan semangat ini — tubuhmu berterima kasih."</div>
+        </div>
+      </div>
+      <div>
+        <div class="section-title">Aktivitas Harian</div>
+        <div class="stats-grid" style="margin-top:8px">
+          <div class="stat-card">
+            <div class="stat-icon">👟</div>
+            <div><span class="stat-value">7,248</span> <span class="stat-unit">langkah</span></div>
+            <div class="stat-label">Target: 10.000</div>
+            <div class="stat-bar"><div class="stat-fill steps-fill"></div></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🔥</div>
+            <div><span class="stat-value">348</span> <span class="stat-unit">kkal</span></div>
+            <div class="stat-label">Target: 600 kkal</div>
+            <div class="stat-bar"><div class="stat-fill cal-fill"></div></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🌙</div>
+            <div><span class="stat-value">7.4</span> <span class="stat-unit">jam</span></div>
+            <div class="stat-label">Tidur tadi malam</div>
+            <div class="stat-bar"><div class="stat-fill sleep-fill"></div></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">❤️</div>
+            <div><span class="stat-value">78</span> <span class="stat-unit">bpm</span></div>
+            <div class="stat-label">Detak jantung</div>
+            <div class="stat-bar"><div class="stat-fill hr-fill"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="context-banner">
+        <span class="context-icon">⛅</span>
+        <div>
+          <div class="context-title">Konteks Hari Ini: Mendung, 27°C · Jakarta</div>
+          <div class="context-text">Cocok untuk latihan indoor. Kami rekomendasikan sesi yoga 30 menit.</div>
+        </div>
+      </div>
+      <div>
+        <div class="section-title">Rekomendasi Latihan</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+          <div class="workout-card">
+            <div class="workout-thumb" style="background:#EAF3DE">🧘</div>
+            <div><div class="workout-name">Yoga Pagi</div><div class="workout-meta">30 menit · Pemula · Indoor</div></div>
+            <span class="badge badge-green">Disarankan</span>
+          </div>
+          <div class="workout-card">
+            <div class="workout-thumb" style="background:#FAEEDA">🏃</div>
+            <div><div class="workout-name">Lari Ringan</div><div class="workout-meta">20 menit · Sedang · Outdoor</div></div>
+            <span class="badge badge-amber">Populer</span>
+          </div>
+          <div class="workout-card">
+            <div class="workout-thumb" style="background:#EEEDFE">💪</div>
+            <div><div class="workout-name">Latihan Kekuatan</div><div class="workout-meta">45 menit · Lanjutan · Gym</div></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="section-title">Aksesibilitas</div>
+        <div class="a11y-row" style="margin-top:8px">
+          <div class="a11y-btn"><div>🔊</div>Voice<br>Guide</div>
+          <div class="a11y-btn"><div>🔡</div>Teks<br>Besar</div>
+          <div class="a11y-btn"><div>🎨</div>Kontras<br>Tinggi</div>
+          <div class="a11y-btn"><div>🤏</div>Haptic<br>Feedback</div>
+        </div>
+      </div>
+    </div>
+    <div class="nav-bar">
+      <div class="nav-item active">
+        <div class="nav-icon-wrap"><span class="nav-icon">🏠</span></div>
+        <span class="nav-label">Beranda</span>
+      </div>
+      <div class="nav-item"><span class="nav-icon">📊</span><span class="nav-label">Aktivitas</span></div>
+      <div class="nav-item"><span class="nav-icon">🎯</span><span class="nav-label">Tujuan</span></div>
+      <div class="nav-item"><span class="nav-icon">👤</span><span class="nav-label">Profil</span></div>
+    </div>
+  </div>
+  <script>
+    const moods = [
+      { emoji: '😐', text: 'Biasa saja' },
+      { emoji: '😊', text: 'Semangat!' },
+      { emoji: '😴', text: 'Mengantuk' },
+      { emoji: '😤', text: 'Penuh energi' },
+      { emoji: '😔', text: 'Kurang bersemangat' },
+    ];
+    let moodIdx = 0;
+    function cycleMood() {
+      moodIdx = (moodIdx + 1) % moods.length;
+      document.getElementById('mood-emoji').textContent = moods[moodIdx].emoji;
+      document.getElementById('mood-text').textContent = moods[moodIdx].text;
+      updateMotivation();
+    }
+    const motivations = [
+      '"Kamu sudah 3 hari berturut-turut aktif! Pertahankan semangat ini — tubuhmu berterima kasih."',
+      '"Hari ini mungkin berat, tapi satu langkah kecil sudah cukup. Ayo mulai!"',
+      '"Tidurmu tadi malam sangat baik. Manfaatkan energi itu untuk bergerak hari ini!"',
+      '"Istirahat juga bagian dari latihan. Dengarkan tubuhmu."',
+      '"Energimu penuh! Ini waktu terbaik untuk mencoba latihan baru."',
+    ];
+    let motIdx = 0;
+    function nextMotivation() { motIdx = (motIdx + 1) % motivations.length; document.getElementById('mot-text').textContent = motivations[motIdx]; }
+    function updateMotivation() { document.getElementById('mot-text').textContent = motivations[moodIdx % motivations.length]; }
+  </script>
+</body>
+</html>
