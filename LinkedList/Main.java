@@ -1,8 +1,3 @@
-// ============================================
-// File: Main.java
-// Sistem Kasir Toko menggunakan Queue & Stack
-// ============================================
-
 import java.util.Scanner;
 
 // ----- Class Node untuk menyimpan data pelanggan -----
