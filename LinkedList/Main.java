@@ -1,12 +1,13 @@
-import java.util.Scanner;
 
+ import java.util.Scanner;
+ 
 // ----- Class Node untuk menyimpan data pelanggan -----
 class Node {
     String kode;       // nomor antrian
     String nama;       // nama pelanggan
     double total;      // total belanja
     Node next;         // pointer ke node berikutnya
-
+ 
     public Node(String kode, String nama, double total) {
         this.kode = kode;
         this.nama = nama;
@@ -14,30 +15,30 @@ class Node {
         this.next = null;
     }
 }
-
+ 
 // ----- Class Queue (FIFO) untuk antrian pelanggan -----
 class Queue {
     private Node front; // node terdepan (akan dilayani duluan)
     private Node rear;  // node terbelakang (paling baru masuk)
     private int jumlah;
     private final int MAX = 5; // batas maksimal antrian
-
+ 
     public Queue() {
         this.front = null;
         this.rear = null;
         this.jumlah = 0;
     }
-
+ 
     // Cek antrian penuh
     public boolean isFull() {
         return jumlah >= MAX;
     }
-
+ 
     // Cek antrian kosong
     public boolean isEmpty() {
         return front == null;
     }
-
+ 
     // Enqueue: tambah pelanggan ke belakang antrian
     public void enqueue(String kode, String nama, double total) {
         if (isFull()) {
@@ -55,7 +56,7 @@ class Queue {
         jumlah++;
         System.out.println("Data pelanggan ditambahkan ke antrian!");
     }
-
+ 
     // Dequeue: ambil pelanggan terdepan (yang dilayani)
     public Node dequeue() {
         if (isEmpty()) {
@@ -68,7 +69,7 @@ class Queue {
         jumlah--;
         return dilayani;
     }
-
+ 
     // Tampilkan seluruh antrian
     public void tampilkan() {
         if (isEmpty()) {
@@ -88,22 +89,22 @@ class Queue {
         System.out.println("Total Antrian: " + jumlah);
     }
 }
-
+ 
 // ----- Class Stack (LIFO) untuk riwayat transaksi -----
 class Stack {
     private Node top; // node teratas (transaksi terbaru)
     private int jumlah;
-
+ 
     public Stack() {
         this.top = null;
         this.jumlah = 0;
     }
-
+ 
     // Cek stack kosong
     public boolean isEmpty() {
         return top == null;
     }
-
+ 
     // Push: simpan transaksi ke stack
     public void push(String kode, String nama, double total) {
         Node baru = new Node(kode, nama, total);
@@ -111,7 +112,7 @@ class Stack {
         top = baru;      // top sekarang = node baru
         jumlah++;
     }
-
+ 
     // Display: tampilkan riwayat dari terbaru ke lama
     public void display() {
         if (isEmpty()) {
@@ -131,7 +132,7 @@ class Stack {
         System.out.println("Total Transaksi: " + jumlah);
     }
 }
-
+ 
 // ----- Class Main (entry point) -----
 public class Main {
     public static void main(String[] args) {
@@ -139,7 +140,7 @@ public class Main {
         Queue antrian = new Queue();
         Stack riwayat = new Stack();
         int pilih;
-
+ 
         do {
             System.out.println("\n=== SISTEM KASIR TOKO ===");
             System.out.println("1. Tambah Antrian");
@@ -148,7 +149,7 @@ public class Main {
             System.out.println("4. Lihat Riwayat Transaksi");
             System.out.println("5. Keluar");
             System.out.print("Pilih menu: ");
-
+ 
             try {
                 pilih = Integer.parseInt(sc.nextLine());
             } catch (NumberFormatException e) {
@@ -156,10 +157,9 @@ public class Main {
                 pilih = 0;
                 continue;
             }
-
+ 
             switch (pilih) {
                 case 1:
-                    // Enqueue: input data pelanggan baru
                     System.out.print("Masukkan Nomor Antrian: ");
                     String kode = sc.nextLine();
                     System.out.print("Masukkan Nama Pelanggan: ");
@@ -174,9 +174,8 @@ public class Main {
                     }
                     antrian.enqueue(kode, nama, total);
                     break;
-
+ 
                 case 2:
-                    // Dequeue + push ke stack riwayat
                     Node dilayani = antrian.dequeue();
                     if (dilayani != null) {
                         System.out.println("Melayani pelanggan " + dilayani.kode +
@@ -185,24 +184,24 @@ public class Main {
                         System.out.println("Transaksi disimpan ke riwayat.");
                     }
                     break;
-
+ 
                 case 3:
                     antrian.tampilkan();
                     break;
-
+ 
                 case 4:
                     riwayat.display();
                     break;
-
+ 
                 case 5:
                     System.out.println("Terima kasih, program selesai.");
                     break;
-
+ 
                 default:
                     System.out.println("Pilihan tidak valid!");
             }
         } while (pilih != 5);
-
+ 
         sc.close();
     }
 }
